@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+requests
+apscheduler
+python-dotenv
+jinja2
+python-multipart
+pytz
