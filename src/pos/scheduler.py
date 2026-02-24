@@ -48,13 +48,13 @@ def send_daily_noti():
         profit = revenue - cost
         
         msg = (
-            f"☕ *Vu Caffe - Báo Cáo Ngày {yesterday_str}*\n"
+            f"📊 *Modern POS - Daily Summary {yesterday_str}*\n"
             f"━━━━━━━━━━━━━━━━━━\n"
-            f"💰 *Doanh thu:* {crud.format_vnd(revenue)}\n"
-            f"📉 *Chi phí:* {crud.format_vnd(cost)}\n"
-            f"💎 *Lợi nhuận:* {crud.format_vnd(profit)}\n"
+            f"💰 *Revenue:* {crud.format_vnd(revenue)}\n"
+            f"📉 *Cost:* {crud.format_vnd(cost)}\n"
+            f"💎 *Profit:* {crud.format_vnd(profit)}\n"
             f"━━━━━━━━━━━━━━━━━━\n"
-            f"📅 _Báo cáo tự động Python Pure_"
+            f"📅 _Automated Python POS Report_"
         )
         
         crud.send_telegram_noti(db, msg)
