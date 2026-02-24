@@ -22,6 +22,12 @@
 - [x] `[REFACTOR]` 🟡 **`inner_bom_process()` vs `inner_inner_bom_process()`** — `ury_daily_p_and_l.py:10-57` — 2026-02-24
   Hai hàm gần giống nhau, khác chỉ ở chỗ `inner_bom_process` có đệ quy BOM lồng. Đã dùng đệ quy thật sự (`max_depth=2` parameter) và xóa hẳn `inner_inner_bom_process`.
 
+- [x] `[FEAT]` 🟡 **Vu Caffe Database Aggregation** — `scheduler_vu_caffe.py` — 2026-02-24
+  Thêm `Vu Caffe Daily Report` và `Monthly Report` dùng kiểu dữ liệu JSON gom nhóm doanh thu theo ngày/tháng để tối ưu dung lượng Database.
+
+- [x] `[FEAT]` 🟡 **Vu Caffe Telegram Notification** — `noti_telegram.py` — 2026-02-24
+  Thiết lập Single Doctype `Vu Caffe Config` lưu Token, tạo cron job gửi báo cáo doanh thu/chi phí vào 8h sáng hàng ngày qua Telegram.
+
 ### 🟢 Low — Backlog
 
 - [ ] `[DOCS]` 🟢 Thiếu inline documentation cho toàn bộ API functions Python
@@ -128,6 +134,22 @@ v2
 ## Lịch sử thay đổi
 
 <!-- Thêm entries mới Ở TRÊN, không ở dưới -->
+
+## [2026-02-24] — Vu Caffe Giảm Tải Database & Cài Đặt Telegram Notifier
+
+### 🟢 VN Tích hợp Cấu Hình Config Single Doctype UI, Aggregator, và Telegram
+- **File thay đổi**: `scheduler_vu_caffe.py`, `noti_telegram.py`, `vu_caffe_config.py`
+- **Vấn đề gốc**: DB đầy rất nhanh do query / lưu trữ từng record 1 theo ngày làm nặng hệ thống. Không có báo cáo gọn nhẹ cho Admin quán nhỏ.
+- **Root Cause - Tầng CODE**: Có — Hệ thống thiếu custom cron cho aggregated map. Thiếu webhook push qua telegram.
+- **Root Cause - Tầng DB**: Có — Cần design Doctype JSON map thay vì Row based.
+- **Fix thực hiện**: 
+  - Khai báo Cron 8h Sáng chạy module EOD Calculator lấy revenue, cost. 
+  - Lưu vào `Vu Caffe Daily Report` dạng { day : {rev, cost} }.
+  - Trigger API sendMessage của Telegram dùng Token / Chat ID lưu trong Single Config.
+- **Test**: Compile python files successfully. Config UI tested qua Single Doctype.
+- **Performance trước/sau**: DB Storage Space sẽ giảm đi >80% mỗi tháng do thu gom 30 order rows thành 1 JSON object.
+
+---
 
 ## [2026-02-24] — Tích hợp i18n Việt hóa (Phase 2)
 
