@@ -161,10 +161,7 @@ scheduler_events = {
     "cron":{
 		"* * * * *":[
 			"ury.ury.api.ury_kot_validation.kotValidationThread"
-		],
-        "0 8 * * *": [
-            "ury.ury.scheduler_vu_caffe.update_daily_report"
-        ]
+		]
 	}
 # 	"all": [
 # 		"ury.tasks.all"

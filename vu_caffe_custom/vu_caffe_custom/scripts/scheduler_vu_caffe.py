@@ -1,7 +1,7 @@
 import frappe
 import json
 from frappe.utils import today, add_days
-from ury.ury.noti_telegram import trigger_daily_notification
+from vu_caffe_custom.vu_caffe_custom.scripts.noti_telegram import trigger_daily_notification
 
 @frappe.whitelist()
 def update_daily_report():
