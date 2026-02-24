@@ -1,0 +1,13 @@
+[
+    {
+        "id": "item_external_image",
+        "name": "External Product Image Support",
+        "description": "Explains how to use external HTTPS links for product photos to save VM disk space.",
+        "steps": [
+            "Navigate to Stock > Item",
+            "Open your Item (e.g. Cà Phê Sữa Đá)",
+            "In the 'Image' field, instead of uploading, you can paste the external URL: https://vn1.co/uploads/ab376ea9952a9c8bcab7b774be53d9fe.jpg",
+            "Save the Item."
+        ]
+    }
+]

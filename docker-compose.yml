@@ -1,0 +1,49 @@
+services:
+  db:
+    image: mariadb:10.6
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - db-data:/var/lib/mysql
+
+  redis-cache:
+    image: redis:alpine
+  redis-queue:
+    image: redis:alpine
+  redis-socketio:
+    image: redis:alpine
+
+  backend:
+    image: frappe/frappe-worker:v15
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - REDIS_CACHE=redis-cache:6379
+      - REDIS_QUEUE=redis-queue:6379
+      - REDIS_SOCKETIO=redis-socketio:6379
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - apps:/home/frappe/frappe-bench/apps
+    working_dir: /home/frappe/frappe-bench
+    command: 
+      - /bin/bash
+      - -c
+      - |
+        bench get-app ury https://github.com/889Anonymous/vu_caffe --branch main
+        bench install-app ury
+        bench install-app vu_caffe_custom
+        bench start
+
+  frontend:
+    image: frappe/frappe-nginx:v15
+    environment:
+      - BACKEND_HOST=backend:8000
+    volumes:
+      - sites:/usr/share/nginx/html/sites
+    ports:
+      - "8080:8080"
+
+volumes:
+  db-data:
+  sites:
+  apps:
