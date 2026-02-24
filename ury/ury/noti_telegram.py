@@ -10,7 +10,11 @@ def send_tele_noti(message, chat_id, token):
         frappe.log_error(f"Telegram noti fail: {str(e)}", "Telegram Notification Error")
 
 def get_config_value(key):
-    # Try getting from site_config.json
+    # Try getting from Vu Caffe Config Doctype first
+    val = frappe.db.get_single_value('Vu Caffe Config', key)
+    if val: return val
+    
+    # Fallback to site_config.json
     val = frappe.conf.get(key)
     if val: return val
     return None
