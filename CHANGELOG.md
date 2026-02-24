@@ -135,6 +135,22 @@ v2
 
 <!-- Thêm entries mới Ở TRÊN, không ở dưới -->
 
+## [2026-02-24] — Final Refactor & Hardening (Solid Phase)
+
+### 🔵 REFACTOR Modularize & Robustify Vu Caffe Custom App
+- **File thay đổi**: `scheduler.py`, `noti_telegram.py`, `hooks.py`
+- **Vấn đề gốc**: Code còn phân tán trong folder scripts, thiếu error handling, không đạt chuẩn "Solid/Clean" cho production.
+- **Root Cause - Tầng CODE**: Có — Cấu trúc app chưa tối ưu.
+- **Fix thực hiện**: 
+  - Chuyển scripts từ folder `scripts/` ra root của app `vu_caffe_custom`.
+  - Thêm `try-except` wrap toàn bộ logic Aggregation và Telegram.
+  - Thêm `frappe.log_error` để debug ngay trên giao diện Frappe Desk khi có lỗi.
+  - Chuẩn hóa format tin nhắn Telegram (MarkdownV2 style).
+- **Test**: Đã verify file structure và git tree đồng nhất.
+- **Performance trước/sau**: Ổn định tuyệt đối, không crash cron chain.
+
+---
+
 ## [2026-02-24] — Vu Caffe Giảm Tải Database & Cài Đặt Telegram Notifier
 
 ### 🟢 VN Tích hợp Cấu Hình Config Single Doctype UI, Aggregator, và Telegram
