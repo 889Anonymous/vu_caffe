@@ -1,0 +1,23 @@
+[project]
+name = "modern-pos"
+version = "0.1.0"
+description = "Lightweight Pure Python POS System"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "sqlalchemy",
+    "pydantic",
+    "pydantic-settings",
+    "requests",
+    "apscheduler",
+    "python-dotenv",
+    "jinja2",
+    "python-multipart",
+    "pytz",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
