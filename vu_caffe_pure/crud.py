@@ -48,20 +48,20 @@ def create_order(db: Session, items_data: list):
     db.refresh(db_order)
     return db_order
 
+from sqlalchemy import func
+
 def get_daily_aggregated_data(db: Session, target_date: date):
-    # Sum grand_total from Orders
-    rev_result = db.query(models.Order).filter(
+    # Sum grand_total from Orders directly in SQL
+    revenue = db.query(func.sum(models.Order.grand_total)).filter(
         models.Order.posting_date == target_date,
         models.Order.docstatus == 1
-    ).all()
-    revenue = sum(o.grand_total for o in rev_result)
+    ).scalar() or 0
     
     # Sum total_amount from StockEntries (Material Issue)
-    cost_result = db.query(models.StockEntry).filter(
+    cost = db.query(func.sum(models.StockEntry.total_amount)).filter(
         models.StockEntry.posting_date == target_date,
         models.StockEntry.purpose == "Material Issue"
-    ).all()
-    cost = sum(s.total_amount for s in cost_result)
+    ).scalar() or 0
     
     return revenue, cost
 
