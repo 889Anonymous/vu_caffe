@@ -1,1 +1,1 @@
-export const privateKey = `PASTE_YOUR_PRIVATE_KEY_HERE`;
+export const privateKey = "PASTE YOUR KEY HERE";

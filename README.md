@@ -1,11 +1,11 @@
-# Modern Hybrid POS Monorepo
+# Modern Hybrid POS Monorepo (Original UI)
 
-This repository contains a lightweight, high-performance POS system with a Python backend and a ReactJS frontend.
+This repository contains a high-performance POS system with a **Pure Python Backend** and the **Original Vue.js Frontend**.
 
 ## Project Structure
-- `pos-backend/`: FastAPI + SQLite + APScheduler. Handles all business logic, data persistence, and automated Telegram notifications.
-- `pos-frontend/`: ReactJS + Vite + Tailwind. Recovered legacy UI optimized for faster interaction.
-- `legacy-vue-pos/`: Backup of the original Vue-based POS.
+- `pos-backend/`: FastAPI + SQLite + APScheduler. Handles business logic, persistence, and automated Telegram notifications. Implements a compatibility layer for the original UI.
+- `pos-frontend/`: Original Vue.js + Vite + Tailwind. The premium, feature-rich interface recovered and optimized for the new backend.
+- `pos/`: (Deprecated) Backup folder.
 
 ## Getting Started
 
@@ -13,7 +13,7 @@ This repository contains a lightweight, high-performance POS system with a Pytho
 ```bash
 cd pos-backend
 pip install -r requirements.txt
-python -m uvicorn src.pos.main:app --reload
+python -m uvicorn src.pos.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ### 2. Run the Frontend
@@ -31,5 +31,5 @@ docker-compose up --build -d
 Access at `http://localhost:5173` (Frontend) and `http://localhost:8000/api` (Backend).
 
 ## Maintenance
-- **Branding**: All components follow the "Modern POS" neutral branding.
-- **Reporting**: Automated EOD summaries delivered via Telegram at 08:00 AM.
+- **Legacy Compatibility**: Backend mapping in `src/pos/routers/api.py`.
+- **Reporting**: Automated EOD summaries delivered via Telegram.
