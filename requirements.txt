@@ -1,2 +1,11 @@
-# frappe -- https://github.com/frappe/frappe is installed via 'bench init'
-# Node version minimum 18.18.0 
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+pydantic-settings
+requests
+apscheduler
+python-dotenv
+jinja2
+python-multipart
+pytz
