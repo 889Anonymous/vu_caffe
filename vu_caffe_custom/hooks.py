@@ -11,7 +11,7 @@ app_license = "MIT"
 scheduler_events = {
     "cron":{
         "0 8 * * *": [
-            "vu_caffe_custom.vu_caffe_custom.scripts.scheduler_vu_caffe.update_daily_report"
+            "vu_caffe_custom.vu_caffe_custom.scheduler.update_daily_report"
         ]
     }
 }
