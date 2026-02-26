@@ -16,7 +16,7 @@ export default defineConfig({
 		}
 	},
 	build: {
-		outDir: '../ury/public/urypos',
+		outDir: 'dist',
 		emptyOutDir: true,
 		target: 'es2015',
 	},
